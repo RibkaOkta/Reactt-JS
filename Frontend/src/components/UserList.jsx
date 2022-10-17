@@ -1,28 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
-
+ 
 const UserList = () => {
-const [users, setUser] = userState([]);
-
+const [users, setUser] = useState([]);
+ 
  useEffect(() => {
     getUsers();
  }, []);
-
-
-
+ 
+ 
+ 
 const getUsers = async () =>{
-    const reponse = await axios.get('http://localhost:3000/users');
+    const reponse = await axios.get('http://localhost:3003/users');
     console.log(Response.data);
 };
-
+ 
 const deleteUser = async (id) =>{
     try{
-        await axios.delete('http://localhost:3000/users/${id}');
+        await axios.delete('http://localhost:3001/users/${id}');
         getUsers();
     } catch(error) {
        console.log(error);
-
+ 
     }
 }
     return(
@@ -58,9 +58,11 @@ const deleteUser = async (id) =>{
               
             </tbody>
            </table>
-
+ 
            </table>
         </div>
         </div>
     )
 }
+ 
+export default UserList;
