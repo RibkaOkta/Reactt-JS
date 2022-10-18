@@ -12,19 +12,19 @@ const [users, setUser] = useState([]);
  
  
 const getUsers = async () =>{
-    const reponse = await axios.get('http://localhost:3003/users');
-    console.log(Response.data);
+    const reponse = await axios.get("http://localhost:5000/users");
+    setUser(reponse.data);
 };
  
 const deleteUser = async (id) =>{
     try{
-        await axios.delete('http://localhost:3001/users/${id}');
+        await axios.delete('http://localhost:5000/users/${id}');
         getUsers();
-    } catch(error) {
+    } catch (error) {
        console.log(error);
- 
-    }
-}
+    }}
+
+
     return(
         <div className="colums mt-5 is-centerd">
         <div className="column is-half">
@@ -32,23 +32,22 @@ const deleteUser = async (id) =>{
                 Add New
             </Link>
             <table className="table is-striped is-fullwidth">
-           <table>
             <thead>
                 <tr>
                     <th>NO</th>
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Gender</th>
-                    <th>Actiions</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {users.map((user, index) =>  (
                 <tr key= {user.id}>
-                      <td>[index + 1]</td>
-                      <td>[user.name]</td>
-                      <td>[user.email]</td>
-                      <td>[user.gender]</td>
+                      <td>{index + 1}</td>
+                      <td>{user.name}</td>
+                      <td>{user.email}</td>
+                      <td>{user.gender}</td>
                       <td>
                         <Link to={'edit/$user.id'} className="button is-small is-info">Edit</Link>
                         <button onClick={()=> deleteUser(user.id)} className="button is-small is-danger">Delete</button>
@@ -59,7 +58,7 @@ const deleteUser = async (id) =>{
             </tbody>
            </table>
  
-           </table>
+        
         </div>
         </div>
     )
